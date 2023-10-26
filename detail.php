@@ -33,7 +33,7 @@ if(isset($_SESSION["account"])) {
         $pid = $_GET['id'];
         $conn = new Connect();
         $dbLink = $conn->connectToPDO();
-        $sql = "SELECT * FROM product p, supplier s, employee e, category c WHERE c.cat_id = p.product_cat AND p.supplier_id = s.supplier_id AND p.employee_id = e.employee_id AND product_id=?";
+        $sql = "SELECT * FROM product p , supplier s, employee e, category c WHERE c.cat_id = p.product_cat AND p.supplier_id = s.supplier_id AND p.employee_id = e.employee_id AND product_id=?";
         $stmt = $dbLink->prepare($sql);
         $stmt->execute(array($pid));
         $re = $stmt->fetch(PDO::FETCH_BOTH);
