@@ -8,7 +8,7 @@ if (isset($_SESSION['account'])) {
         $c = new Connect();
         $dbLink = $c->connectToPDO();
 
-        $proID = $_POST['proId'];
+        // $proID = $_POST['proId'];
         $proName = $_POST['proName'];
         $proCat = $_POST['proCat'];
         $importDate = date('Y-m-d', strtotime($_POST['importDate']));
@@ -25,11 +25,11 @@ if (isset($_SESSION['account'])) {
         ); //dua hinh vao duong dan ./img/
 
         if ($flag) {
-            $sql = "INSERT INTO `product`(`product_id`, `product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO `product`(`product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`) VALUES (?,?,?,?,?,?,?,?,?)";
 
             $re = $dbLink->prepare($sql);
             $valueArray = [
-                "$proID",
+                // "$proID",
                 "$proName",
                 "$proCat",
                 "$importDate",
@@ -54,14 +54,7 @@ if (isset($_SESSION['account'])) {
 ?>
 <div class="container">
     <form action="#" class="form form-vertical" method="POST" enctype="multipart/form-data"> <!--multipart: upload file
-        <!--Product ID-->
-        <div class="row mb-3">
-            <div class="col-12">
-                <label for="proId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Product
-                    ID</label>
-                <input type="text" id="proId" name="proId" class="form-control" value="" placeholder="Product ID">
-            </div>
-        </div>
+        
 
         <!--Product name-->
         <div class="row mb-3">
@@ -142,6 +135,20 @@ if (isset($_SESSION['account'])) {
                     <option selected>Employee</option>
                     <option value="1">Dinh Dinh Khoi</option>
                     <option value="2">Pham Vo Nhut Truong</option>
+                </select>
+            </div>
+        </div>
+
+         <!-- Shop id  -->
+         <div class="row mb-3">
+            <div class="col-12">
+                <label for="emId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Employee</label>
+                <select name="emId" id="emId" class="form-select">
+                    <option selected>Employee</option>
+                    <option value="1">ATNCanTho</option>
+                    <option value="2">ATNSaiGon</option>
+                    <option value="3">ATNCaMau</option>
+                    <option value="4">ATNBenTre</option>
                 </select>
             </div>
         </div>
