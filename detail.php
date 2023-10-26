@@ -33,7 +33,7 @@ if(isset($_SESSION["account"])) {
         $pid = $_GET['id'];
         $conn = new Connect();
         $dbLink = $conn->connectToPDO();
-        $sql = "SELECT * FROM product p , supplier s, employee e, category c WHERE c.cat_id = p.product_cat AND p.supplier_id = s.supplier_id AND p.employee_id = e.employee_id AND product_id=?";
+        $sql = "SELECT * FROM product p, supplier s, employee e, category c, shop sh WHERE p.s_id = sh.shop_id AND c.cat_id = p.product_cat AND p.supplier_id = s.supplier_id AND p.employee_id = e.employee_id AND product_id=?";
         $stmt = $dbLink->prepare($sql);
         $stmt->execute(array($pid));
         $re = $stmt->fetch(PDO::FETCH_BOTH);
@@ -66,6 +66,9 @@ if(isset($_SESSION["account"])) {
                 <br>
                 Employee:
                 <?= $re['employee_name'] ?>
+                <br>
+                Shop name:
+                <?= $re['shop_name']?>
             </div>
 
             <button type="submit" name="btnUpdate" class="btn btn-success my-3 mx-auto">

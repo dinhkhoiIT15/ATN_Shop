@@ -52,6 +52,7 @@
 
                             <div class="dropdown-menu" style="background-color: #102E44;">
                                 <a href="productadd.php" class="dropdown-item" style="color: #fff">Add product</a>
+                                <a href="listShop.php" class="dropdown-item" style="color: #fff">All shop</a>
                                 <!-- <a href="#" class="dropdown-item" style="color: #fff">Add customer</a> -->
                             </div>
                         </div>

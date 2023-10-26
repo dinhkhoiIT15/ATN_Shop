@@ -14,9 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $supplierId = $_POST['supId'];
     $employeeId = $_POST['emId'];
     $img = $_POST['img'];
+    $shopId = $_POST['shopId'];
 
     $sql = "UPDATE product SET 
-            product_id = '$proId',
+            -- product_id = '$proId',
             product_name = '$proName',
             product_cat = '$proCat',
             origin_price = '$originPrice',
@@ -24,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             date = '$importDate',
             pro_img = '$img',
             supplier_id = '$supplierId',
-            employee_id= '$employeeId'
+            employee_id= '$employeeId',
+            s_id = '$shopId'
 
             WHERE product_id = $proId";
 
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $pro_id = $_GET['id'];
-$sql = "SELECT * FROM product p, employee e, supplier s, category c WHERE p.product_cat = c.cat_id AND p.employee_id = e.employee_id AND p.supplier_id = s.supplier_id AND product_id ='$pro_id'";
+$sql = "SELECT * FROM product p, employee e, supplier s, category c, shop sh WHERE p.s_id = sh.shop_id AND p.product_cat = c.cat_id AND p.employee_id = e.employee_id AND p.supplier_id = s.supplier_id AND product_id ='$pro_id'";
 $re = $blink->query($sql);
 $row = $re->fetch_assoc();
 
@@ -135,6 +137,20 @@ $row = $re->fetch_assoc();
                     <option selected value="<?=$row['employee_id']?>"><?=$row['employee_name']?></option>
                     <option value="1">Dinh Dinh Khoi</option>
                     <option value="2">Pham Vo Nhut Truong</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Shop ID  -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="shopId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Shop ID</label>
+                <select name="shopId" id="shopId" class="form-select">
+                    <option selected value="<?=$row['shop_id']?>"><?= $row['shop_name']?></option>
+                    <option value="1">ATNCanTho</option>
+                    <option value="2">ATNSaiGon</option>
+                    <option value="3">ATNCaMau</option>
+                    <option value="4">ATNBenTre</option>
                 </select>
             </div>
         </div>

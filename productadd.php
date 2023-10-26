@@ -16,6 +16,7 @@ if (isset($_SESSION['account'])) {
         $salePrice = $_POST['sPrice'];
         $supplierId = $_POST['supId'];
         $employId = $_POST['emId'];
+        $shopId = $_POST['shopId'];
 
         $img = str_replace(' ', '-', $_FILES['Pro_image']['name']);
         $imgdir = './img/'; //duong dan
@@ -25,7 +26,7 @@ if (isset($_SESSION['account'])) {
         ); //dua hinh vao duong dan ./img/
 
         if ($flag) {
-            $sql = "INSERT INTO `product`(`product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`) VALUES (?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO `product`(`product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`, `s_id`) VALUES (?,?,?,?,?,?,?,?,?)";
 
             $re = $dbLink->prepare($sql);
             $valueArray = [
@@ -37,7 +38,8 @@ if (isset($_SESSION['account'])) {
                 "$originPrice",
                 "$salePrice",
                 "$supplierId",
-                "$employId"
+                "$employId",
+                "$shopId"
             ];
 
             $stmt = $re->execute($valueArray);
@@ -54,7 +56,14 @@ if (isset($_SESSION['account'])) {
 ?>
 <div class="container">
     <form action="#" class="form form-vertical" method="POST" enctype="multipart/form-data"> <!--multipart: upload file
-        
+        <!--Product ID-->
+        <!-- <div class="row mb-3">
+            <div class="col-12">
+                <label for="proId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Product
+                    ID</label>
+                <input type="text" id="proId" name="proId" class="form-control" value="" placeholder="Product ID">
+            </div>
+        </div> -->
 
         <!--Product name-->
         <div class="row mb-3">
@@ -139,12 +148,12 @@ if (isset($_SESSION['account'])) {
             </div>
         </div>
 
-         <!-- Shop id  -->
-         <div class="row mb-3">
+        <!-- Shop ID  -->
+        <div class="row mb-3">
             <div class="col-12">
-                <label for="emId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Employee</label>
-                <select name="emId" id="emId" class="form-select">
-                    <option selected>Employee</option>
+                <label for="shopId" class="col-sm-2" style="font-weight: bold; color:cornflowerblue">Shop ID</label>
+                <select name="shopId" id="shopId" class="form-select">
+                    <option selected>Select shop</option>
                     <option value="1">ATNCanTho</option>
                     <option value="2">ATNSaiGon</option>
                     <option value="3">ATNCaMau</option>
