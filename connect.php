@@ -13,10 +13,10 @@ class Connect
         // $this->username = 'zxvv73ie7op90932';
         // $this->password = 'hfqu828ah73nd15r';
 
-        $this->server = 'localhost';
-        $this->dbName = 'atn_shop';
-        $this->username = 'root';
-        $this->password = '';
+        $this->server = 'grp6m5lz95d9exiz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+        $this->dbName = 'msjonmewddddfqnh';
+        $this->username = 'k75cbgoxbnku7bd0';
+        $this->password = 'pqsfd6snxga0a7j1';
     }
 
     //Option 1: mySQL
