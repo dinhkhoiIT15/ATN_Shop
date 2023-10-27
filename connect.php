@@ -8,10 +8,10 @@ class Connect
 
     public function __construct()
     {
-        $this->server = 'localhost';
-        $this->dbName = 'atn_shop';
-        $this->username = 'root';
-        $this->password = '';
+        $this->server = 'grp6m5lz95d9exiz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com';
+        $this->dbName = 't2qc2qv6ytikj5r9';
+        $this->username = 'flav8hn27ryznsfy';
+        $this->password = 'as6vnspghbebdklm';
     }
 
     //Option 1: mySQL

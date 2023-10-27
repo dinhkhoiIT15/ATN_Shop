@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2023 at 07:44 AM
+-- Generation Time: Oct 27, 2023 at 05:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -102,22 +102,24 @@ CREATE TABLE `product` (
   `origin_price` decimal(10,0) NOT NULL,
   `sale_price` decimal(10,0) NOT NULL,
   `supplier_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL
+  `employee_id` int(11) NOT NULL,
+  `s_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`) VALUES
-(1, 'The Ninja Lloy', 1, '2023-10-01', 'Lloy.jpg', 200000, 300000, 1, 2),
-(2, 'The Ninja Guy', 1, '2023-10-01', 'Guy.jpg', 200000, 300000, 1, 2),
-(3, 'The Ninja Cole', 1, '2023-10-01', 'cole.jpg', 200000, 230000, 1, 1),
-(4, 'The Ninja Zane', 1, '2023-10-01', 'Zane.jpg', 300000, 350000, 1, 2),
-(5, 'Classic 3x3 Rubik', 2, '2023-10-01', 'rubik3x3.jpg', 300000, 350000, 2, 2),
-(6, 'Megamix Rubik', 2, '2023-10-04', 'megaminx-300x278.jpg', 300000, 350000, 2, 1),
-(7, 'Skewb Rubik', 2, '2023-10-09', 'Skewb.jpg', 200000, 300000, 2, 2),
-(8, 'The Rubik 2x2x2', 2, '2023-10-01', '2x2x2 rubik.jpg', 200000, 250000, 2, 1);
+INSERT INTO `product` (`product_id`, `product_name`, `product_cat`, `date`, `pro_img`, `origin_price`, `sale_price`, `supplier_id`, `employee_id`, `s_id`) VALUES
+(11, 'The Ninja Lloy', 1, '2023-10-01', 'Lloy.jpg', 300000, 350000, 1, 2, 2),
+(12, 'The Ninja Guy', 1, '2023-10-01', 'Guy.jpg', 200000, 250000, 1, 2, 1),
+(13, 'The Ninja Cole', 1, '2023-10-09', 'cole.jpg', 200000, 250000, 1, 2, 4),
+(14, 'The Ninja Zane', 1, '2023-10-06', 'Zane.jpg', 300000, 350000, 1, 1, 2),
+(15, 'Classic 3x3 Rubik', 2, '2023-10-12', 'rubik3x3.jpg', 200000, 250000, 2, 1, 2),
+(16, 'Megamix Rubik', 2, '2023-10-10', 'megaminx-300x278.jpg', 200000, 250000, 2, 2, 2),
+(17, 'Skewb Rubik', 2, '2023-10-11', 'Skewb.jpg', 200000, 250000, 2, 1, 1),
+(18, 'The Rubik 2x2x2', 2, '2023-10-11', '2x2x2-rubik.jpg', 300000, 350000, 2, 1, 3),
+(21, 'The update name', 1, '2023-10-01', 'Kai.jpg', 200000, 250000, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ CREATE TABLE `shop` (
 
 INSERT INTO `shop` (`shop_id`, `shop_name`, `city`, `address`) VALUES
 (1, 'ATNCanTho', 'Can Tho', 'Ninh Kieu'),
-(2, 'ATN SaiGon', 'Sai Gon', 'Thu Duc'),
+(2, 'ATNSaiGon', 'Sai Gon', 'Thu Duc'),
 (3, 'ATNCaMau', 'Ca Mau', 'Dam Doi'),
 (4, 'ATNBenTre', 'Ben Tre', 'Thanh Phu');
 
@@ -192,7 +194,8 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `employee_fk` (`employee_id`),
   ADD KEY `cat_fk` (`product_cat`),
-  ADD KEY `supplier_fk` (`supplier_id`);
+  ADD KEY `sup_fk` (`supplier_id`),
+  ADD KEY `sid_fk` (`s_id`);
 
 --
 -- Indexes for table `shop`
@@ -214,7 +217,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -223,7 +226,7 @@ ALTER TABLE `product`
 --
 -- Constraints for table `employee`
 --
-ALTER TABLE `employee`tc5jncns603y2s75
+ALTER TABLE `employee`
   ADD CONSTRAINT `shop_fk` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`shop_id`);
 
 --
@@ -232,7 +235,8 @@ ALTER TABLE `employee`tc5jncns603y2s75
 ALTER TABLE `product`
   ADD CONSTRAINT `cat_fk` FOREIGN KEY (`product_cat`) REFERENCES `category` (`cat_id`),
   ADD CONSTRAINT `employee_fk` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
-  ADD CONSTRAINT `supplier_fk` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`);
+  ADD CONSTRAINT `sid_fk` FOREIGN KEY (`s_id`) REFERENCES `shop` (`shop_id`),
+  ADD CONSTRAINT `sup_fk` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
